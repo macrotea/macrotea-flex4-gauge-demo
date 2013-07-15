@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%" 
+		 horizontalAlign="center" verticalAlign="middle"
+		 creationComplete="init(event)"
+		 >
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import cn.ac.iscas.gz.sems.chart.vo.*;
+			import cn.ac.iscas.gz.sems.chart.comp.*;
+			
+
+			protected function init(event:FlexEvent):void
+			{
+				for(var i:int=0;i<20;i++){
+					//温度
+					var temperatureGaugeVo:TemperatureGaugeVo = new TemperatureGaugeVo();
+					temperatureGaugeVo.uid="001";
+					temperatureGaugeVo.desc="温度计-001";
+					temperatureGaugeVo.currentValue=-10;
+					
+					var temperatureGaugeBox:GaugeBox = new GaugeBox();
+					temperatureGaugeBox.dataVo = temperatureGaugeVo;
+					
+					gaugeTileGroup.addChild(temperatureGaugeBox);
+
+				}
+			}
+
+		]]>
+	</fx:Script>
+	
+	<mx:TileList id="gaugeTileGroup"
+				 height="100%" width="100%" doubleClickEnabled="true"
+				 selectable="true" selectedIndex="0" 
+				 direction="horizontal" 
+				 columnWidth="100"
+				 rowHeight="50"
+				 columnCount="4"
+				 verticalScrollPolicy="on"
+				 horizontalScrollPolicy="on"
+				 >
+	</mx:TileList>
+</mx:VBox>

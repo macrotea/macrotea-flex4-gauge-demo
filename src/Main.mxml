@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   creationComplete="init(event)"
+			   >
+	<fx:Script>
+		<![CDATA[
+			import cn.ac.iscas.gz.sems.chart.comp.GaugeBox;
+			import cn.ac.iscas.gz.sems.chart.vo.AirQualityGaugeVo;
+			import cn.ac.iscas.gz.sems.chart.vo.GaugeVo;
+			import cn.ac.iscas.gz.sems.chart.vo.HumidityGaugeVo;
+			import cn.ac.iscas.gz.sems.chart.vo.TemperatureGaugeVo;
+			import cn.ac.iscas.gz.sems.util.StringUtil;
+			
+			import mx.events.FlexEvent;
+
+			protected function init(event:FlexEvent):void
+			{
+				trace(StringUtil.abbreviateMiddle("集中控制器数据导入模板http://localhost:30090/spider/managerTask.jsp", "...", 30));
+				
+				//温度
+				var temperatureGaugeVo:TemperatureGaugeVo = new TemperatureGaugeVo();
+				temperatureGaugeVo.uid="001";
+				temperatureGaugeVo.desc="温度计-001";
+				temperatureGaugeVo.currentValue=-10;
+				
+				var temperatureGaugeBox:GaugeBox = new GaugeBox();
+				temperatureGaugeBox.dataVo = temperatureGaugeVo;
+				
+				gaugeTileGroup.addElement(temperatureGaugeBox);
+				
+				//湿度
+				var humidityGaugeVo:HumidityGaugeVo = new HumidityGaugeVo();
+				humidityGaugeVo.uid="002";
+				humidityGaugeVo.desc="湿度计-002";
+				humidityGaugeVo.currentValue=40;
+				
+				var humidityGaugeBox:GaugeBox = new GaugeBox();
+				humidityGaugeBox.dataVo = humidityGaugeVo;
+				
+				gaugeTileGroup.addElement(humidityGaugeBox);
+				
+				//空气质量
+				var airQualityGaugeVo:AirQualityGaugeVo = new AirQualityGaugeVo();
+				airQualityGaugeVo.uid="003";
+				airQualityGaugeVo.desc="空气质量计-003";
+				airQualityGaugeVo.currentValue=250;
+				
+				var airQualityGaugeBox:GaugeBox = new GaugeBox();
+				airQualityGaugeBox.dataVo = airQualityGaugeVo;
+				
+				gaugeTileGroup.addElement(airQualityGaugeBox);
+				
+			}
+
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				var len:int = gaugeTileGroup.numElements;
+				
+				for(var i:int=0;i<len;i++){
+					//温度
+					var temperatureGaugeVo:TemperatureGaugeVo = new TemperatureGaugeVo();
+					temperatureGaugeVo.uid="001";
+					temperatureGaugeVo.desc="温度计-001";
+					temperatureGaugeVo.currentValue=-10;
+					
+					var temperatureGaugeBox:GaugeBox = new GaugeBox();
+					temperatureGaugeBox.dataVo = temperatureGaugeVo;
+					
+					gaugeTileGroup.addElement(temperatureGaugeBox);
+					
+					//湿度
+					var humidityGaugeVo:HumidityGaugeVo = new HumidityGaugeVo();
+					humidityGaugeVo.uid="002";
+					humidityGaugeVo.desc="湿度计-002";
+					humidityGaugeVo.currentValue=40;
+					
+					var humidityGaugeBox:GaugeBox = new GaugeBox();
+					humidityGaugeBox.dataVo = humidityGaugeVo;
+					
+					gaugeTileGroup.addElement(humidityGaugeBox);
+					
+					//空气质量
+					var airQualityGaugeVo:AirQualityGaugeVo = new AirQualityGaugeVo();
+					airQualityGaugeVo.uid="003";
+					airQualityGaugeVo.desc="空气质量计-003";
+					airQualityGaugeVo.currentValue=250;
+					
+					var airQualityGaugeBox:GaugeBox = new GaugeBox();
+					airQualityGaugeBox.dataVo = airQualityGaugeVo;
+					
+					gaugeTileGroup.addElement(airQualityGaugeBox);
+				}
+			}
+
+		]]>
+	</fx:Script>
+	<s:VGroup width="100%" height="100%">
+		<s:HGroup width="10%" height="100%">
+			<s:Button id="button" click="button_clickHandler(event)" label="改变"/>
+		</s:HGroup>
+		<s:BorderContainer width="90%" height="100%" styleName="borderContainer" backgroundColor="0xF2F7BB">
+			<s:Scroller id="verticalScroller" horizontalScrollPolicy="off" height="100%" width="100%">
+				<s:TileGroup id="gaugeTileGroup" width="100%" height="100%" />
+			</s:Scroller>
+		</s:BorderContainer>
+	</s:VGroup>
+		
+</s:Application>

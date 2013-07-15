@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="200" height="180" 
+		  xmlns:bttc="com.betterthantomorrow.components.*"
+		  xmlns:gauge="com.betterthantomorrow.components.gauge.*"
+		  verticalAlign="middle"
+		  horizontalAlign="center"
+		  >
+	<fx:Declarations>
+		<mx:NumberFormatter precision="0" id="formatter" rounding="nearest"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import cn.ac.iscas.gz.sems.chart.vo.GaugeVo;
+			
+			[Bindable]
+			private var _dataVo:GaugeVo;
+			
+			public function get dataVo():GaugeVo
+			{
+				return _dataVo;
+			}
+			public function set dataVo(value:GaugeVo):void
+			{
+				_dataVo = value;
+			}
+		]]>
+	</fx:Script>
+	<!--
+	mx:Canvas : backgroundColor="{_dataVo.backgroundColor}"
+	-->
+		<bttc:Gauge id="gauge" 
+					diameter="{_dataVo.diameter}" width="100%"  
+					verticalCenter="0" horizontalCenter="0"
+					minValue="{_dataVo.minValue}"  maxValue="{_dataVo.maxValue}" value="{_dataVo.currentValue}" valueFormatter="{formatter}"
+					bigTicks="9" smallTicks="45" showMinMax="true" showValue="true" suffix="{_dataVo.suffix}" alertRatios="{_dataVo.alertRatios}" alertColors="{_dataVo.alertColors}"/>            
+	<s:Label id="descLabel" text="{_dataVo.desc}"/>
+</s:VGroup>
